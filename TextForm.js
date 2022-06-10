@@ -19,9 +19,7 @@ export default function TextForm(props) {
     setText(e.target.value);
   };
   const handleCopy = () => {
-    var text = document.getElementById("exampleFormControlTextarea1");
-    text.select();
-    navigator.clipboard.writeText(text.value);
+    navigator.clipboard.writeText(text);
     props.showAlerts("text copied to Clipboard", "success");
   };
   const handleExtraSpaces = () => {
@@ -49,16 +47,32 @@ export default function TextForm(props) {
             rows="6"
           ></textarea>
         </div>
-        <button className="btn btn-primary" onClick={handleUpper}>
+        <button
+          disabled={text.length === 0}
+          className="btn btn-primary mx-1 my-1"
+          onClick={handleUpper}
+        >
           Convert to UpperCase
         </button>
-        <button className="btn btn-primary mx-3" onClick={handleClear}>
+        <button
+          disabled={text.length === 0}
+          className="btn btn-primary mx-1 my-1"
+          onClick={handleClear}
+        >
           Clear
         </button>
-        <button className="btn btn-primary" onClick={handleCopy}>
+        <button
+          disabled={text.length === 0}
+          className="btn btn-primary mx-1 my-1"
+          onClick={handleCopy}
+        >
           Copy Text
         </button>
-        <button className="btn btn-primary mx-3" onClick={handleExtraSpaces}>
+        <button
+          disabled={text.length === 0}
+          className="btn btn-primary mx-1 my-1"
+          onClick={handleExtraSpaces}
+        >
           Remove Extra Spaces
         </button>
       </div>
@@ -69,10 +83,9 @@ export default function TextForm(props) {
         <h2>Text Summary</h2>
         <p>
           {
-            text
-              .replace(/\n/g, " ")
-              .split(" ")
-              .filter((value) => value !== "").length
+            text.split(/\s+/).filter((element) => {
+              return element.length !== 0;
+            }).length
           }{" "}
           words and {text.trim().length} characters
         </p>
@@ -82,3 +95,4 @@ export default function TextForm(props) {
     </>
   );
 }
+
