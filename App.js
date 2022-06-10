@@ -30,7 +30,6 @@ function App() {
       showAlerts("Light mode has been enabled", "success");
     }
   };
-  //pass a seperate style containing both the buttons
   return (
     <>
       <Router>
